@@ -5,16 +5,22 @@ using HangFireCore.WebApp.Models;
 using HangFireCore.WebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace HangFireCore.WebApp
 {
     public class Startup
     {
+        private Logger logger = LogManager.GetCurrentClassLogger();
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -29,7 +35,10 @@ namespace HangFireCore.WebApp
             }
 
             builder.AddEnvironmentVariables();
+
             Configuration = builder.Build();
+
+            env.ConfigureNLog("NLog.config");
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -37,6 +46,9 @@ namespace HangFireCore.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //call this in case you need aspnet-user-authtype/aspnet-user-identity
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -60,6 +72,9 @@ namespace HangFireCore.WebApp
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            //add NLog to ASP.NET Core
+            loggerFactory.AddNLog();
 
             if (env.IsDevelopment())
             {
@@ -85,12 +100,13 @@ namespace HangFireCore.WebApp
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            // Initialize Dabatabase
+            //add NLog.Web
+            app.AddNLogWeb();
 
+            // Initialize Dabatabase
             InitDb();
 
             // Configure Hangfire
-
             app.UseHangfireServer();
 
             app.UseHangfireDashboard("/hangfire", new DashboardOptions()
