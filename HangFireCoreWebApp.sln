@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangFireCore.WebApp", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangFireCore.Core", "src\HangFireCore.Core\HangFireCore.Core.csproj", "{5A1F8F06-DB35-430F-A525-4AF419D97A14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangFireCore.Job.One", "src\HangFireCore.Job.One\HangFireCore.Job.One.csproj", "{21460D55-C89C-407A-894F-5F2647474237}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{5A1F8F06-DB35-430F-A525-4AF419D97A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A1F8F06-DB35-430F-A525-4AF419D97A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A1F8F06-DB35-430F-A525-4AF419D97A14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21460D55-C89C-407A-894F-5F2647474237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21460D55-C89C-407A-894F-5F2647474237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21460D55-C89C-407A-894F-5F2647474237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21460D55-C89C-407A-894F-5F2647474237}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +36,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D443CEBB-FBCA-4448-A6DB-D6A7312D2B50} = {ADE3919A-FC8B-4E11-BCDE-0AD8019FD5BD}
 		{5A1F8F06-DB35-430F-A525-4AF419D97A14} = {ADE3919A-FC8B-4E11-BCDE-0AD8019FD5BD}
+		{21460D55-C89C-407A-894F-5F2647474237} = {ADE3919A-FC8B-4E11-BCDE-0AD8019FD5BD}
 	EndGlobalSection
 EndGlobal

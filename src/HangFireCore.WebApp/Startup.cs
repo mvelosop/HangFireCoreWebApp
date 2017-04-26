@@ -113,6 +113,9 @@ namespace HangFireCore.WebApp
             {
                 Authorization = new[] { new HangfireDashboardAuthorizationFilter() }
             });
+
+            // Recurring jobs
+            env.ScheduleRecurringJobs();
         }
 
         private void InitDb()
