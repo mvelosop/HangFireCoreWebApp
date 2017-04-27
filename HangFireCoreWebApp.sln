@@ -11,6 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangFireCore.Core", "src\Ha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangFireCore.Job.One", "src\HangFireCore.Job.One\HangFireCore.Job.One.csproj", "{21460D55-C89C-407A-894F-5F2647474237}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01EAF18A-8A74-4099-AE4E-81E403449C62}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangFireCore.Job.Two", "src\HangFireCore.Job.Two\HangFireCore.Job.Two.csproj", "{DAB6F55D-6247-4EDC-B37F-E370AA56FFDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +36,10 @@ Global
 		{21460D55-C89C-407A-894F-5F2647474237}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21460D55-C89C-407A-894F-5F2647474237}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21460D55-C89C-407A-894F-5F2647474237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAB6F55D-6247-4EDC-B37F-E370AA56FFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAB6F55D-6247-4EDC-B37F-E370AA56FFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAB6F55D-6247-4EDC-B37F-E370AA56FFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAB6F55D-6247-4EDC-B37F-E370AA56FFDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,5 +48,6 @@ Global
 		{D443CEBB-FBCA-4448-A6DB-D6A7312D2B50} = {ADE3919A-FC8B-4E11-BCDE-0AD8019FD5BD}
 		{5A1F8F06-DB35-430F-A525-4AF419D97A14} = {ADE3919A-FC8B-4E11-BCDE-0AD8019FD5BD}
 		{21460D55-C89C-407A-894F-5F2647474237} = {ADE3919A-FC8B-4E11-BCDE-0AD8019FD5BD}
+		{DAB6F55D-6247-4EDC-B37F-E370AA56FFDF} = {ADE3919A-FC8B-4E11-BCDE-0AD8019FD5BD}
 	EndGlobalSection
 EndGlobal

@@ -45,7 +45,7 @@ namespace HangFireCore.WebApp.Helpers
 
                         var assemblyJobs = assembly
                             .ExportedTypes
-                            .Where(et => et.GetTypeInfo().GetCustomAttribute<HangfireMinutesJobAttribute>() != null);
+                            .Where(et => et.GetTypeInfo().GetCustomAttribute<HangfireJobMinutesAttribute>() != null);
 
                         if (!assemblyJobs.Any())
                         {
@@ -54,16 +54,19 @@ namespace HangFireCore.WebApp.Helpers
 
                         foreach (Type job in assemblyJobs)
                         {
-                            int minutes = job.GetTypeInfo().GetCustomAttribute<HangfireMinutesJobAttribute>().Minutes;
+                            int minutes = job.GetTypeInfo().GetCustomAttribute<HangfireJobMinutesAttribute>().Minutes;
 
                             logger.Trace(@"Scheduling recurring job ""{0}"" with {1} minutes interval", job.Name, minutes);
 
                             MethodInfo executeMethod = job.GetMethod("Execute");
 
-							// Get lambda expression to call the "Execute" method
-                            Expression<Action> expression = Expression.Lambda<Action>(Expression.Call(executeMethod));
+                            if (executeMethod != null)
+                            {
+                                // Get lambda expression to call the "Execute" method
+                                Expression<Action> expression = Expression.Lambda<Action>(Expression.Call(executeMethod));
 
-                            RecurringJob.AddOrUpdate(job.FullName, expression, Cron.MinuteInterval(minutes));
+                                RecurringJob.AddOrUpdate(job.FullName, expression, Cron.MinuteInterval(minutes));
+                            }
                         }
 
                     }

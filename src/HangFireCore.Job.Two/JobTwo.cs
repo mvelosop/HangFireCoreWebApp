@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace HangFireCore.Job.One
 {
-    [HangfireJobMinutes(1)]
-    public class JobOne
+    [HangfireJobMinutes(2)]
+    public class JobTwo
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private static DateTime start = DateTime.Now;
