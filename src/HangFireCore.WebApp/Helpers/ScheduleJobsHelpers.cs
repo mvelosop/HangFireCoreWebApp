@@ -19,20 +19,26 @@ namespace HangFireCore.WebApp.Helpers
         {
             try
             {
-                logger.Trace("Scheduling recurring jobs...");
+                logger.Info("Scheduling recurring jobs...");
                 logger.Trace("Loading job modules...");
 
                 string location = Assembly.GetEntryAssembly().Location;
 
                 string directory = Path.GetDirectoryName(location);
 
+                // Find modules that follow the job convention
                 var jobModules = Directory.EnumerateFiles(directory, "HangFireCore.Job.*.dll", SearchOption.TopDirectoryOnly);
+
+                if (!jobModules.Any())
+                {
+                    logger.Info("Didn't find any job module.");
+                }
 
                 foreach (var module in jobModules)
                 {
                     try
                     {
-                        logger.Trace("Loading Job assembly: {0}", module);
+                        logger.Info("Loading Job assembly: {0}", module);
                         Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(module);
 
                         logger.Trace("Getting jobs...");
@@ -41,14 +47,20 @@ namespace HangFireCore.WebApp.Helpers
                             .ExportedTypes
                             .Where(et => et.GetTypeInfo().GetCustomAttribute<HangfireMinutesJobAttribute>() != null);
 
+                        if (!assemblyJobs.Any())
+                        {
+                            logger.Info("Didn't find any job.");
+                        }
+
                         foreach (Type job in assemblyJobs)
                         {
                             int minutes = job.GetTypeInfo().GetCustomAttribute<HangfireMinutesJobAttribute>().Minutes;
 
-                            logger.Trace("Scheduling Job {0} with {1} minutes interval", job.Name, minutes);
+                            logger.Trace(@"Scheduling recurring job ""{0}"" with {1} minutes interval", job.Name, minutes);
 
                             MethodInfo executeMethod = job.GetMethod("Execute");
 
+							// Get lambda expression to call the "Execute" method
                             Expression<Action> expression = Expression.Lambda<Action>(Expression.Call(executeMethod));
 
                             RecurringJob.AddOrUpdate(job.FullName, expression, Cron.MinuteInterval(minutes));

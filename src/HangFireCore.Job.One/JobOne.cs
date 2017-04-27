@@ -13,7 +13,7 @@ namespace HangFireCore.Job.One
 
         public static Task Execute()
         {
-            return Task.Run(() => logger.Info(@"Executing Job One - {0:mm\:ss\.fff}", DateTime.Now - start));
+            return Task.Run(() => logger.Info(@"Executing Job One - {0:hh\:mm\:ss\.fff}", DateTime.Now - start));
         }
     }
 }
